@@ -1,0 +1,23 @@
+server:
+  port: 8001
+  
+  
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: patientregistration-service
+        uri: lb://PATIENT-SERVICE
+        predicates:
+        - Path=/registration/**
+      - id: patientlogin-service
+        uri: lb://LOGIN-SERVICE
+        predicates:
+        - Path=/login/**   
+
+eureka:
+   client:
+     fetch-registry: true
+     register-with-eureka: true
